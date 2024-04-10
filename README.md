@@ -6,4 +6,4 @@
     - [Arrays & Hashing](NeetCode150/Arrays&Hashing/)
     - [Two Pointers](NeetCode150/Two%20Pointers/)
     - [Sliding Window](NeetCode150/Sliding%20Window/)
-
+    - [Stack](NeetCode150/Stack/)
