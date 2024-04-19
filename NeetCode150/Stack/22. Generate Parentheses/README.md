@@ -38,6 +38,7 @@ Constraints:
 > 時間、空間複雜度
 > 解法的優缺點
 * Time
-    * O(2<sup>2n<sup>) 遞迴深度最多是2*n
+    * O(2<sup>2n<sup>) 
+        *   遞迴深度最多是2*n
 * Space
     * O(n) 
