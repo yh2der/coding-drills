@@ -18,9 +18,11 @@ Constraints:
 ### Understand
 > 理解題目
 > 想input, output，要包含edge case(面試的話)
+
 找n組括號合理的排列組合
 ### Match
 > 想一下可以用甚麼資料結構跟演算法
+
 可以用遞迴跟回溯來找到所有排列組合，而回溯可以用stack實現
 ### Plan
 > 畫圖跟寫虛擬碼並且
