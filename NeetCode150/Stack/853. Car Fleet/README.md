@@ -42,3 +42,28 @@ Constraints:
 * All the values of `position` are unique.
 * `0 < speed[i] <= 106`
 ---
+
+## UMPIRE
+### Understand
+計算會有幾個car fleet
+
+* 在只有一線道的馬路所以不能超車，且後車追上前車後便會降速至前車速度(追上後兩車視為同一個位置)，這也形成一個car fleet
+* 終點位置才相遇也視為一個car fleet
+
+### Match
+* stack
+存放fleets
+
+### Plan
+1. 宣告一個stack存放fleets；一個vector<pair<int, float>> 存放位置和其到達目的地所需時間
+2. 由小到大排序此vector(O(nlog<sup>n<sup>))
+3. iterate 整個vector(相當於從離終點最遠的位置開始)，看可不可以追到前車(到終點的時間有沒有比前車小)，如果可以就會是同一個fleet。若可以追到stack中只要留前車因為追到之後速度跟前車保持一樣，最後return時就看stack的長度即是答案
+
+### Implement
+see sol.cpp
+
+### Review
+
+### Evaluate
+* Time Complexity: O(nlog<sup>n<sup>)
+* Space Complexity: O(n)
