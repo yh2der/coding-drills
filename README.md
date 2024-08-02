@@ -5,9 +5,12 @@ Hi! My name is Howard. I will use c++ to solve problem from [Neetcode](https://n
 - [NeetCode](NeetCode150/)
     - [Arrays & Hashing](NeetCode150/Arrays&Hashing/)
     - [Two Pointers](NeetCode150/Two%20Pointers/)
+    - [Binary Search](NeetCode150/Binary%20Search/)
     - [Sliding Window](NeetCode150/Sliding%20Window/)
     - [Stack](NeetCode150/Stack/)
-
+    - [Linked List](NeetCode150/Linked%20List/)
+    - [Tree](NeetCode150/Tree/)
+    
 ## UMPIRE法則
 ### Templates
 #### Understand
