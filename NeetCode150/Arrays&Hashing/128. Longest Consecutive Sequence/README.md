@@ -1,11 +1,44 @@
 # 128. Longest Consecutive Sequence
-## 直觀
-排序完之後遍歷一次，如果是連續的就count++，否則就歸零，但時間複雜度至少O(olog<sup>n<sup>)，不合要求
-## Optimize Approach
-### Unorder_map
-1. 把資料放入map並且預設value是true(代表是起點)
-2. 在map搜尋nums[i]-1，如果存在代表nums[i]不是起點 所以設成false
-3. 再遍歷一次 map，如果 map[nums[i]] 是 true，就搜尋 nums[i] 後面連續的數字，直到找不到為止。這樣可以找出以 nums[i] 為起點的連續整數序列的長度，並更新最長連續序列的長度。
-### unorder_set
-1. 先將資料插入set
-2. 遍歷map，如果num[i]-1找不到，代表num[i]是起點，從這個元素開始往下計算連續長度，並且更新最長的連續序列長度。
+## UMPIRE
+### Understand
+- Can the input array be empty?
+    yes
+- Any requirement on time/space complexity?
+    You must write an algorithm that runs in O(n) time
+- What should we return if there is no subsequence with consecutive elements?
+    return 0
+- What should I return for an empty array?
+    return 0
+- What should we return if there are duplicate elements in the subsequence?
+    Duplicates don't add to the count
+
+### Match
+- array and hashing
+
+### Plan
+General Idea : Use a hash set to efficiently check for the presence of elements. For each element n, if n-1 is not found in the set, consider n as the starting point of a potential consecutive sequence.
+
+1. Initialize a hash set `numSet` with the elements from the given array `nums`.
+2. Traverse each element in `nums`:
+   1. If `nums[i] - 1` doesn’t exist in `numSet`, consider `nums[i]` as the starting point of a sequence.
+   2. Initialize a variable `length` to 1, which will track the length of the current sequence.
+   3. While loop: Continue checking if `nums[i] + length` exists in `numSet`.
+      - If it does, increment `length` by 1 to include this number in the sequence.
+   4. Update the maximum sequence length (`longest`) by comparing it with the current sequence length (`length`).
+3. Return the value of `longest`, which will be the length of the longest consecutive sequence in `nums`.
+
+
+### Implement
+see sol.cpp
+
+### Review
+
+### Evaluate
+- Time Complexity : O(n), which `n` is the length of `numSet`
+- Space Complexity : O(n), which `n` is the length of `numSet`
+- Pros
+    - Efficiency
+    - Simplicity
+    - No sorting required
+- Cons
+    - Space required

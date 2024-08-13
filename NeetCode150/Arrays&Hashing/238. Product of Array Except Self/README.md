@@ -1,10 +1,42 @@
 # 238. Product of Array Except Self
-## Goal
-目標是計算給定整數陣列 nums 中，除了索引 i 以外的所有元素的乘積，並將結果存儲在一個新的陣列中。我們將這個新的陣列稱為 answer
-## Intuition
-我只想的到雙層loops的作法
-## Steps
-1. 創建了一個與 nums 相同大小的 answer 陣列，並將其初始化為全部為1，這是因為計算乘積時，將每個元素的前綴乘積和後綴乘積乘在一起，對應的初始值就是1。
-2. 我們使用一個變數 prefix 來計算每個元素的前綴乘積。我們從左到右遍歷 nums 陣列，在遍歷的同時，將 prefix 乘以當前元素並存儲在 answer 中。這樣 answer 中的每個元素都會存儲著當前索引位置之前所有元素的乘積。
-3. 我們使用另一個變數 suffix 來計算每個元素的後綴乘積。我們從右到左遍歷 nums 陣列，同樣將 suffix 乘以當前元素並與 answer 中對應索引位置的值相乘，這樣 answer 中的每個元素就包含了除了自身以外的所有元素的乘積。
-4. 我們將計算好的 answer 陣列返回作為結果。
+## UMPIRE
+### Understand 
+![alt text](image.png)
+
+- Because we need to solve it in O(n), we cannot use double loop to solve.
+- The input will be empty?
+    - No, the input has two number at least.
+
+### Match 
+- array and hashing
+
+### Plan
+General Idea : Calculate the product befroe the index and after the index, then multiply them together
+
+1. Initialize a vector called `answer` of the same size as `nums`, filled with 1s
+2. Calculate Prefix Products :
+    1. initialize `prefix` to store the product before the element frist
+    2. traverse the array from left to right
+    3. For each element, update `answer[i]` by multiplying it with `prefix`
+    4. Then, update `prefix` by multiplying it with `nums[i]`
+3. Calculate Postfix Products :
+    - initialize `postfix` to store the product after the element
+    - traverse the array from right to left
+    - update `answer[i]` by multiplying it with `postfix`
+    - Then, update `postfix` by multiplying it with `nums[i]`
+4. Return `answer`
+
+### Implement
+see sol.cpp
+
+### Review
+
+### Evaluate
+- Time Complexity : O(n), which `n` is length of array
+
+- Space Complexity : O(n), which `n` is length of `answer`
+
+- Pros
+    - efficiency
+- Cons
+    - Requires careful handling of indices during computation

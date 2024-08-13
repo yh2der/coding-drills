@@ -1,27 +1,40 @@
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+using namespace std;
+
 class Solution {
 public:
-    static bool compare(const pair<int, int>& a, const pair<int, int>& b) {
-        return a.second > b.second;
-    }
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        unordered_map<int, int> frequent;
-        for (auto& num : nums) {
-            frequent[num]++;
+        // count the frequency
+        unordered_map<int, int> count;
+
+        // We add one to the size of the vector because array indices start at zero.
+        // This ensures that the vector has enough space to accommodate all possible indices. 
+        // For example, if nums.size() is 5, we need a vector of size 6 to access indices 0 through 5.                                            
+        vector<vector<int>> freq(nums.size() + 1);
+
+        // count the frequency of elements with a map
+        for (int n : nums) {
+            count[n]++;
         }
 
-        vector<pair<int, int>> sorted;
-        for (auto& pair : frequent) {
-            sorted.push_back(pair);
+        // claim the frequency as key, elements as value
+        for (const auto& entry : count) {
+            freq[entry.second].push_back(entry.first);
         }
-        sort(sorted.begin(), sorted.end(), compare);
 
-        vector<int> ans;
-        for (auto& pair : sorted) {
-            if (k > 0) {
-                ans.push_back(pair.first);
+        // iterate through from the end of vector
+        vector<int> res;
+        for (int i = freq.size() - 1; i > 0; --i) {
+            for (int n : freq[i]) {
+                res.push_back(n);
+                if (res.size() == k) {
+                    return res;
+                }
             }
-            k--;
         }
-        return ans;
+
+        return res;
     }
 };

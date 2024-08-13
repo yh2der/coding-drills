@@ -1,19 +1,44 @@
 # 347. Top K Frequent Elements
-## Intuition
-先遍歷一遍然後遇到的值就把它當作key，並且把value++來計算出現次數
-## Steps
-1. 先用map計算字母出現次數
-2. 存放到vector並按照出現次數做排序
-3. 取出現次數前k大的傳回
-## Hints
-* 排序map時要先把key, value放到vector再排，假設要按照value排，那在放到vector時可以先顛倒放，就不必再寫一個compare函式
-* 假設要寫一個compare函式給sort用，記得加static，不然會是成員函式無法在class內直接用
-### map vs unordered_map
-* map（映射）：
-    * 有序性：map中的元素按照鍵的升序順序進行排序。這意味著在map中迭代元素時，元素將以升序順序出現。
-    * 內部實現：map內部通常使用紅黑樹（Red-Black Tree）來實現，這使得插入、查找和刪除操作的時間複雜度為O(log n)。
-    * 適用情況：當你需要按照鍵的順序進行訪問或查找時，map是一個不錯的選擇。
-* unordered_map（無序映射）：
-    * 無序性：unordered_map中的元素沒有明確定義的順序。元素的排列順序取決於哈希函數。
-    * 內部實現：unordered_map內部通常使用哈希表（Hash Table）來實現，這使得插入、查找和刪除操作的時間複雜度為平均情況下的O(1)。
-    * 適用情況：當你不需要元素有序，而更關注快速插入、查找和刪除操作時，unordered_map是一個更好的選擇。
+## UMPIRE
+### Understand
+- To cakculate the elements' frequency in the given array and return the top k most frequent elements.
+![alt text](image.png)
+
+### Match
+- array and hashing
+
+### Plan
+1. **Count Frequencies**:
+   - Iterate through the array and use an `unordered_map<int, int>` to count the frequency of each element.
+2. **Bucket Sort**:
+   - Create a `vector<vector<int>>` where the index represents the frequency, and store elements with that frequency in the corresponding vector.
+3. **Extract Top `k` Elements**:
+   - Iterate through the frequency vector from the end to the beginning to collect the top `k` most frequent elements.
+
+
+### Implement
+see sol.cpp
+
+### Review
+
+### Evaluate
+- Time Complexity:
+    - Counting frequencies: 
+        O(n), where n is the number of elements in nums.
+    - Building frequency buckets: O(n).
+    - Extracting top k elements: In the worst case, iterating through the freq vector could be O(n), but usually this step is quicker since k is much smaller than n.
+    - Overall: O(n) (average case).
+
+- Space Complexity:
+    - Space for unordered_map: O(n).
+    - Space for vector<vector<int>> freq: O(n).
+    - Space for result vector: O(k).
+    - Overall: O(n).
+
+- Pros:
+    - Efficient with O(n) time complexity on average.
+    - Uses bucket sort, which is well-suited for this problem since it directly leverages frequency counts.
+
+- Cons:
+    - Additional space for the freq vector and the unordered_map may be significant if n is very large.
+    - If k is very small compared to n, the space used for freq may be excessive, but this is usually not a major issue.

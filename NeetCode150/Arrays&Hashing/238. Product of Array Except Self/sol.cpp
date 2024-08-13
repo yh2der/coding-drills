@@ -4,8 +4,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
-        int n = nums.size();
-        
+        int n = nums.size();        
         vector<int> answer(n, 1);
         
         int prefix = 1;
@@ -14,10 +13,10 @@ public:
             prefix *= nums[i];
         }
         
-        int suffix = 1;
+        int postfix = 1;
         for (int i = n - 1; i >= 0; i--) {
-            answer[i] *= suffix;
-            suffix *= nums[i];
+            answer[i] *= postfix;
+            postfix *= nums[i];
         }
         
         return answer;
