@@ -1,29 +1,24 @@
 class Solution {
 public:
-    int maxArea(vector<int>& height) {
-        int left = 0, right = height.size()-1;
-        int maxVolume = 0;
-        int currentMax = 0;
-
+    int maxArea(vector<int>& heights) {
+        int left = 0;
+        int right = heights.size() - 1;
+        
+        int curr = 0;
+        int result = 0;
+        
         while (left < right) {
-            //看前後比對的哪一個大
-            if (height[left] >= height[right]) {
-                currentMax = height[right] * (right-left);
-            }
-            else {
-                currentMax = height[left] * (right-left);
-            }
-            //若體積>目前最大就更新最大值
-            if (currentMax > maxVolume) {
-                maxVolume = currentMax;
-            }
-            //左指標往右移 右指標往左移(第一次寫的時候沒注意到)
-            if (height[left] <= height[right]) {
-                left++; 
+            curr = (right - left) * min(heights[left], heights[right]);
+            result = max(result, curr);
+            
+            if (heights[left] <= heights[right]) {
+                left++;
             } else {
                 right--;
             }
         }
-        return maxVolume;
+        
+        return result;
     }
 };
+

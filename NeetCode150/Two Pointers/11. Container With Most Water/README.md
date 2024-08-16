@@ -1,18 +1,51 @@
 # 11. Container With Most Water
 
-## 題目
-給定一個非負整數的數組，表示每個位置的高度，求這個容器可以盛下的最大水量。
+## UMPIRE
 
-## 題意
-給定一個非負整數的數組 `height`，其中 `height[i]` 表示第 `i` 個位置的高度。我們需要找到兩個柱子，使得它們與 x 軸構成的容器可以盛下最多的水。容器的寬度是任意的，但其高度由兩個柱子中較短的一個決定。即容器的容量取決於最短的柱子的高度以及兩個柱子之間的距離。
+### Understand
+- Input: An array of integers where each integer represents the height of a vertical line
+- Output: The maximum amount of water a container can store
+- The width of the container is the distance between the two lines
+- The height of the container is limited by the shorter line
+- Are there any constraints on the input array size? 2 <= heights.length <= 10^5
+- Are there any constraints on the height values? 0 <= heights[i] <= 10^4
 
-## 步驟
-1. 定義兩個指針 `left` 和 `right` 分別指向數組的頭和尾。
-2. 遍歷數組，計算當前位置的容器的容量，即 `min(height[left], height[right]) * (right - left)`。
-3. 更新最大容量。
-4. 根據兩個柱子的高度移動指針，若左指針指向的柱子較短，則左指針向右移動；反之，右指針向左移動。
-5. 重複步驟 2 至步驟 4，直到左右指針相遇。
+### Match
+- Two pointers
 
-## 複雜度分析
-- **時間複雜度**：O(n)，其中 n 為數組 `height` 的長度。在最壞情況下，我們需要遍歷整個數組一次。
-- **空間複雜度**：O(1)，我們只使用了固定數量的變量，與數組的大小無關。
+### Plan
+1. Initialize two pointers: left at the start and right at the end of the array
+2. Initialize variables to track current area and maximum area
+3. While left pointer is less than right pointer:
+   - Calculate current area: width (right - left) * height (min of heights at left and right)
+   - Update maximum area if current area is larger
+   - Move the pointer with the shorter height inward:
+     - If height at left is shorter or equal, move left pointer right
+     - Otherwise, move right pointer left
+4. Return the maximum area found
+
+### Implement
+See sol.cpp
+
+### Review
+- The solution correctly uses two pointers to find the maximum area
+- It efficiently calculates areas without needing to check all possible combinations
+- The code is concise and readable
+
+### Evaluate
+- Time Complexity: O(n), where n is the length of the input array
+  - The algorithm makes a single pass through the array
+- Space Complexity: O(1)
+  - Only a constant amount of extra space is used
+
+Pros:
+- Efficient: Linear time complexity
+- Space-efficient: Constant space complexity
+- Simple and intuitive approach
+
+Cons:
+- May not be immediately obvious why moving the shorter line inward is optimal
+- Not easily adaptable to similar but slightly different problems
+
+Key Insight:
+The algorithm works because moving the pointer with the shorter height inward is the only way to potentially increase the area. Moving the pointer with the taller height would only decrease the width and at best maintain the same height, resulting in a smaller area.

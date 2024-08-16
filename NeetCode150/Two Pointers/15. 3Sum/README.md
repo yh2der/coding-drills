@@ -1,15 +1,55 @@
 # 15. 3Sum
-## 思路
-當我們解題時，首先對數組進行排序，這樣可以方便我們找到目標值。排序後，我們使用三個指針來遍歷數組。外層的指針 i 遍歷到倒數第三個元素，這是因為至少需要三個元素才能構成一個三元組。在 i 固定的情況下，我們使用兩個指針 left 和 right 來在 i 的右側進行查找。我們計算 nums[left] + nums[right] 的和，如果和等於目標值（-nums[i]），則找到了一個符合條件的三元組。如果和小於目標值，我們將 left 向右移動，以增加總和；如果和大於目標值，我們將 right 向左移動，以減少總和。在找到符合條件的三元組後，我們還要處理重複的情況，以確保結果中不包含重複的組合。總體而言，這個方法通過固定一個數，然後使用雙指針向兩側遍歷的方式，有效地找到了所有符合條件的三元組。
-## 時間複雜度：
-1. 排序數組的時間複雜度是 O(nlogn)，其中 n 是數組的長度。
-2. 外層迴圈的遍歷時間複雜度是 O(n)，其中 n 是數組的長度。
-3. 內層迴圈使用了兩個指針 left 和 right，它們最多遍歷了數組的一次。因為 left 和 right 都只會向右移動或向左移動，所以它們的總移動次數最多為 n 次。
-4. 在內層迴圈中，進行了兩個指針的夾逼，時間複雜度為 O(n)。
-5. 在找到符合條件的三元組後，還需要處理重複的情況，這一步的時間複雜度最壞情況下也是 O(n)。
 
-** 綜上所述，整個算法的時間複雜度為 O(nlogn + n^2)，簡化後是 O(n^2)。**
+## UMPIRE
 
-## 空間複雜度：
-1. 我們使用了一個向量 ans 來存儲結果，其空間複雜度與最終結果的大小成正比，因此空間複雜度是 O(m)，其中 m 是符合條件的三元組的數量。
-2. 我們並沒有使用額外的空間來存儲中間結果或遞歸調用的棧，因此除了 ans 之外，空間複雜度可以忽略不計。
+### Understand
+- Input: An array of integers
+- Output: A list of all unique triplets that sum to zero
+- The output cannot have duplicate triplets
+- The order of output does not matter
+- Can the input array be empty? Yes, return an empty list
+- Can the input array contain duplicate numbers? Yes
+- Are there any constraints on the input array size? 3 <= nums.length <= 3000
+- Are there any constraints on the integer values? -10^5 <= nums[i] <= 10^5
+
+### Match
+- Two pointers
+- Sorting
+
+### Plan
+1. Sort the input array in ascending order
+2. Iterate through the array with index i:
+   - If nums[i] > 0, break (as sum can't be zero with all positive numbers)
+   - Skip duplicates for i to avoid duplicate triplets
+   - Use two pointers (l and r) to find pairs that sum to -nums[i]
+   - Move pointers based on the sum:
+     - If sum > 0, decrement r
+     - If sum < 0, increment l
+     - If sum == 0, add triplet to result and move both pointers
+   - Skip duplicates for l to avoid duplicate triplets
+
+### Implement
+See the provided code
+
+### Review
+- The solution correctly handles duplicate triplets
+- It uses sorting and two pointers for efficiency
+- Edge cases are handled (breaking when nums[i] > 0)
+- The code is concise and readable
+
+### Evaluate
+- Time Complexity: O(n^2), where n is the length of the input array
+  - Sorting takes O(n log n)
+  - The nested loops (for and while) take O(n^2)
+- Space Complexity: O(1) excluding the space for output
+  - The sorting is done in-place
+  - Only a constant amount of extra space is used
+
+Pros:
+- Efficient: O(n^2) is optimal for this problem
+- Handles duplicates effectively
+- Early termination when nums[i] > 0 improves average-case performance
+
+Cons:
+- Requires modifying the input array (sorting)
+- May not be suitable for very large arrays due to quadratic time complexity

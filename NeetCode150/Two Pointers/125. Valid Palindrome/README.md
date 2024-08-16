@@ -1,17 +1,48 @@
 # 125. Valid Palindrome
-## 直覺
-一前一後兩個指標分別比較，只比較英文跟數字，注意大小寫
-## Steps
-*   定義 toLower 函式，將大寫字母轉換為小寫字母。
-*   定義 is_eng_or_num 函式，檢查字符是否是英文字母或數字。
-*   定義 isPalindrome 函式，使用兩個指針 front 和 end 同時從字串的頭尾向中間移動，比較對應位置的字符。
-*   如果遇到非英文字母或數字的字符，則跳過該字符。
-*   如果對應位置的字符不相等，則返回 false。
-*   如果整個字串都比較完畢且沒有不相等的字符，則返回 true，表示該字串是回文字符串。
-## 時間複雜度分析
-- `toLower` 函數的時間複雜度是常數級的，因為它只執行了固定數量的操作。
-- `is_eng_or_num` 函數的時間複雜度也是常數級的，因為它僅執行了固定數量的比較操作。
-- 在 `isPalindrome` 函數中，使用了雙指針法來進行判斷。最壞情況下，需要遍歷輸入字符串的一半，因此時間複雜度是 O(n/2)，但在算法分析中通常將常數因子省略，因此最終時間複雜度為 O(n)。
+## UMPIRE
+### Understand
+![alt text](image.png)
 
-## 空間複雜度分析
-- 除了輸入字符串 `s` 外，算法沒有使用額外的空間，因此空間複雜度是 O(1)。
+1. Can the input string be empty?
+    Yes, and the result should be `true`
+2. Any requirement on time/space complexity?
+    Solve in O(1) space complexity
+3. Does removing all non-alphanumeric characters means only ASCII character should be consindered?
+    Yes
+
+### Match
+- Two pointers
+
+### Plan
+General Idea : Using two pointers to compare from two ends
+
+1. Initialize `front` with `0` and `end` with `length - 1`, where `length` is the size of the string `s`.
+
+2. While `front` is less than `end`:
+   1. If the character at `front` is not alphanumeric, increment `front` and continue to the next iteration.
+   2. If the character at `end` is not alphanumeric, decrement `end` and continue to the next iteration.
+   3. If the lowercase version of the character at `front` is not equal to the lowercase version of the character at `end`, return `false` (the string is not a palindrome).
+   4. Increment `front` and decrement `end`.
+
+3. If the loop completes without returning `false`, return `true` (the string is a palindrome).
+
+### Implement
+see sol.cpp
+
+### Review
+
+### Evaluate
+- **Time Complexity**:
+  - The time complexity is **O(n)**, where `n` is the length of the string `s`.
+
+- **Space Complexity**:
+  - The space complexity is **O(1)**. The algorithm uses a constant amount of extra space for the `front` and `end` pointers, and does not require additional data structures.
+
+- **Pros**:
+  - **Efficiency**: The algorithm runs in linear time, which is optimal for this problem.
+  - **Space Efficiency**: It uses a constant amount of extra space, making it suitable for situations with limited memory.
+  - **Simplicity**: The approach is straightforward and easy to understand. It combines character filtering and comparison in a single loop.
+
+- **Cons**:
+  - **Readability**: The use of `continue` statements and inline checks might be slightly harder to follow for some readers compared to a more segmented approach.
+  - **Character Case Handling**: Converts characters to lowercase for comparison, which might be less efficient than checking character cases if the character set is large.
