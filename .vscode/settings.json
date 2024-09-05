@@ -5,6 +5,9 @@
         "vector": "cpp",
         "iostream": "cpp",
         "unordered_set": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "utility": "cpp",
+        "random": "cpp",
+        "limits": "cpp"
     }
 }
