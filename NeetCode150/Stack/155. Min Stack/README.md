@@ -1,41 +1,58 @@
-# MinStack Class
+# 155. Min Stack
 
-## Description
+## UMPIRE
 
-The MinStack class is a stack data structure with additional functionality to efficiently retrieve the minimum element in constant time. It supports the usual stack operations: push, pop, top, along with a method to get the minimum element.
+### Understand
+- We need to implement a stack that supports push, pop, top, and retrieving the minimum element
+- All operations should be in O(1) time complexity
+- The stack should support the following operations:
+  1. push(val) - Push element val onto the stack
+  2. pop() - Remove the element on top of the stack
+  3. top() - Get the top element of the stack
+  4. getMin() - Retrieve the minimum element in the stack
+- Can the stack be empty? Yes, and operations on an empty stack should be handled
+- Are there any constraints on the values? -2^31 <= val <= 2^31 - 1
 
-## Implementation
+### Match
+- Stack
+- Auxiliary stack for tracking minimums
 
-The MinStack class is implemented using two stacks:
-- `regularStack`: This stack stores the actual elements pushed onto the stack.
-- `minStack`: This stack keeps track of the current minimum element.
+### Plan
+1. Use two stacks:
+   - One regular stack for storing all elements
+   - One auxiliary stack for tracking minimum elements
+2. For push operation:
+   - Push the value to the regular stack
+   - Compare the value with the top of the min stack (or the value itself if min stack is empty)
+   - Push the smaller value to the min stack
+3. For pop operation:
+   - Remove the top element from both stacks
+4. For top operation:
+   - Return the top element of the regular stack
+5. For getMin operation:
+   - Return the top element of the min stack
 
-## Operations
+### Implement
+See the provided code
 
-1. **push(int x)**:
-   - Pushes the element 'x' onto the stack.
-   - If the minStack is empty or the new element 'x' is less than or equal to the current minimum (top of minStack), 'x' is also pushed onto minStack.
+### Review
+- The solution correctly maintains two stacks to track all elements and minimum elements
+- All operations are performed in O(1) time complexity
+- The code is concise and readable
 
-2. **pop()**:
-   - Removes the top element from the stack.
-   - If the top element of regularStack is equal to the current minimum (top of minStack), the minimum element is popped from minStack.
-   - Complexity: O(1)
+### Evaluate
+- Time Complexity: O(1) for all operations
+- Space Complexity: O(n), where n is the number of elements in the stack
+  - In the worst case, if elements are pushed in ascending order, both stacks will contain all elements
 
-3. **top()**:
-   - Returns the top element of the stack without removing it.
-   - Complexity: O(1)
+Pros:
+- Achieves O(1) time complexity for all operations, including getMin()
+- Simple and straightforward implementation
+- Handles edge cases (empty stack) implicitly
 
-4. **getMin()**:
-   - Returns the current minimum element in the stack.
-   - Complexity: O(1)
+Cons:
+- Uses extra space to maintain the minimum stack
+- Potential for redundant storage in the minimum stack if many elements are equal
 
-## Time Complexity
-
-- **push**: O(1)
-- **pop**: O(1)
-- **top**: O(1)
-- **getMin**: O(1)
-
-## Space Complexity
-
-The space complexity of the MinStack class is O(n), where 'n' is the number of elements stored in the stack. This is because we maintain two stacks, regularStack and minStack, both of which may grow with the number of elements pushed onto the stack.
+Key Insight:
+The auxiliary min stack always keeps track of the minimum element for the corresponding state of the main stack. This allows for constant time minimum retrieval without affecting the standard stack operations.

@@ -1,3 +1,9 @@
+#include<iostream>
+#include<vector>
+#include<stack>
+#include<algorithm>
+using namespace std;
+
 class Solution {
 public:
     int carFleet(int target, vector<int>& position, vector<int>& speed) {
@@ -13,7 +19,7 @@ public:
         
         for(int i=0; i<position.size(); i++){
             float fleet_i = pos_time[i].second;
-         
+            cout << pos_time[i].first;
             while(fleets.size() && (fleet_i >= fleets.top()))
                 fleets.pop();
             
@@ -23,3 +29,11 @@ public:
         return fleets.size();
     }
 };
+
+int main() {
+    Solution sol;
+    vector<int> pos = {4,1,0,7};
+    vector<int> speed = {2,2,1,1};
+    sol.carFleet(10, pos, speed);
+    return 0;
+}

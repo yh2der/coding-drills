@@ -1,44 +1,47 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        unordered_map<char, int> seen;
-        for (int i = 0; i < s1.size(); i++) {
-            seen[s1[i]]++;
+        if (s1.length() > s2.length()) {
+            return false;
         }
 
-        int left = 0, right = 0;
-        int count = s1.size();
-        while (right < s2.size()) {
-            // 看right的字元是否在s1出現過 有加上出現次數>0 則把count減1
-            if (seen.find(s2[right]) != seen.end() && seen[s2[right]] > 0) {
-                count--;
-            }
-            // 更新seen計數
-            if (seen.find(s2[right]) != seen.end()) {
-                seen[s2[right]]--;
-            }
-            // 右指针向右
-            right++;
+        vector<int> s1Count(26, 0);
+        vector<int> s2Count(26, 0);
+        for (int i = 0; i < s1.length(); i++) {
+            s1Count[s1[i] - 'a']++;
+            s2Count[s2[i] - 'a']++;
+        }
 
-            // 當ocunt為0 代表在s2找到s1的排列組合
-            if (count == 0) {
+        int matches = 0;
+        for (int i = 0; i < 26; i++) {
+            if (s1Count[i] == s2Count[i]) {
+                matches++;
+            }
+        }
+
+        int l = 0;
+        for (int r = s1.length(); r < s2.length(); r++) {
+            if (matches == 26) {
                 return true;
             }
 
-            // 窗口要大於s1長度 要縮小 所以left++
-            if (right - left == s1.size()) {
-                // 如果左指標對應的字符在 seen 中，則恢復對應字符的計數
-                if (seen.find(s2[left]) != seen.end()) {
-                    seen[s2[left]]++;
-                    // 如果恢复后计数大于0，则count需要增加
-                    if (seen[s2[left]] > 0) {
-                        count++;
-                    }
-                }
-                // 左指针向右移动
-                left++;
+            int index = s2[r] - 'a';
+            s2Count[index]++;
+            if (s1Count[index] == s2Count[index]) {
+                matches++;
+            } else if (s1Count[index] + 1 == s2Count[index]) {
+                matches--;
             }
+
+            index = s2[l] - 'a';
+            s2Count[index]--;
+            if (s1Count[index] == s2Count[index]) {
+                matches++;
+            } else if (s1Count[index] - 1 == s2Count[index]) {
+                matches--;
+            }
+            l++;
         }
-        return false;
+        return matches == 26;
     }
 };
