@@ -2,6 +2,8 @@
 Hi! My name is Howard. I will use c++ to solve problem from [Neetcode](https://neetcode.io/). As I saw a Taiwanese share that we can try to use UMPIRE during coding which is from [CodePath](https://www.codepath.org/)
 
 ## 目錄
+- [Data Structure](DataStructure/)
+
 - [NeetCode](NeetCode150/)
     - [Arrays & Hashing](NeetCode150/Arrays&Hashing/)
     - [Two Pointers](NeetCode150/Two%20Pointers/)
@@ -10,6 +12,8 @@ Hi! My name is Howard. I will use c++ to solve problem from [Neetcode](https://n
     - [Stack](NeetCode150/Stack/)
     - [Linked List](NeetCode150/Linked%20List/)
     - [Tree](NeetCode150/Tree/)
+
+- [Sorts](Sorts/)
     
 ## UMPIRE法則
 ### Templates
